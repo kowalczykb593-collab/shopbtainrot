@@ -1,109 +1,124 @@
 <!doctype html>
 <html lang="pl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Szymix SAB SHOP</title>
-<link rel="icon" href="data:;base64,=">
 <style>
-  :root{
-    --bg:#071025; --card:rgba(255,255,255,0.03); --accent:#6d28d9; --muted:#9ca3af;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto;
-    background: linear-gradient(180deg,#071025 0%,#0b1220 100%); color:#e6eef8;
-  }
-  .wrap{max-width:980px;margin:28px auto;padding:20px}
-  .card{background:var(--card);padding:20px;border-radius:14px;box-shadow:0 10px 40px rgba(2,6,23,0.7)}
-  header{display:flex;justify-content:space-between;align-items:center}
-  h1{margin:0;font-size:20px}
-  .muted{color:var(--muted);font-size:13px}
-  .btn{background:var(--accent);border:none;padding:8px 12px;border-radius:10px;color:white;cursor:pointer}
-  .tabbar{margin-top:16px;display:flex;gap:8px}
-  .tab{padding:8px 10px;border-radius:8px;cursor:pointer;background:transparent;color:var(--muted)}
-  .tab.active{background:rgba(255,255,255,0.04);color:white}
-  .grid{display:grid;gap:12px}
-  input,select,textarea{background:#071833;border:none;padding:10px;border-radius:8px;color:#e6eef8;width:100%}
-  .license{display:flex;justify-content:space-between;gap:12px;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)}
-  .code{font-family:monospace;background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:6px}
-  .small{font-size:13px;color:var(--muted)}
-  footer{margin-top:14px;font-size:12px;color:var(--muted)}
-  .success{color:#7ee787}
-  .danger{color:#ff8a8a}
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px)} to { opacity: 1; transform: translateY(0) } }
-  .animate { animation: fadeIn .42s ease both; }
+:root{
+  --accent:#ff3b3b; --accent-2:#ff6b6b; --muted:#bfc3c6; --card:rgba(255,255,255,0.03);
+  --bg1: #120202; --bg2:#050202; --glass: rgba(255,255,255,0.02);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto; background: radial-gradient(circle at 20% 20%, #2b0505, #050202); color:#f3f3f3; min-height:100vh}
+.container{max-width:1000px;margin:28px auto;padding:18px}
+.header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;flex-direction:column}
+.brand h1{margin:0;color:var(--accent);text-shadow:0 0 18px rgba(255,59,59,0.12)}
+.brand .sub{color:var(--muted);font-size:13px}
+.authArea{display:flex;gap:10px;align-items:center}
+.btn{background:var(--accent);border:none;padding:8px 12px;border-radius:10px;color:white;cursor:pointer;box-shadow:0 6px 18px rgba(255,59,59,0.12);transition:all .18s ease}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04)}
+.btn.small{padding:6px 8px;font-size:14px}
+.card{background:var(--card);padding:18px;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,0.6);margin-top:18px;backdrop-filter: blur(6px)}
+.tabbar{display:flex;gap:8px;margin-top:16px}
+.tab{padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer;background:transparent}
+.tab.active{background:rgba(255,255,255,0.03);color:white}
+.grid{display:grid;gap:12px}
+.row{display:flex;gap:12px;align-items:center}
+.input{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:#0b0b0b;color:#fff;flex:1}
+.license{background:linear-gradient(180deg, rgba(255,0,0,0.03), transparent);padding:12px;border-radius:10px;border:1px solid rgba(255,59,59,0.06);display:flex;justify-content:space-between;align-items:center}
+.code{font-family:monospace;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.02)}
+.small{font-size:13px;color:var(--muted)}
+.toast-wrap{position:fixed;right:20px;bottom:20px;display:flex;flex-direction:column;gap:8px;z-index:9999}
+.toast{padding:10px 14px;border-radius:10px;color:#111;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,0.5)}
+.toast.success{background:#d6f5e1;color:#04320a}
+.toast.error{background:#ffd6d6;color:#3e0202}
+.toast.info{background:#dfe9ff;color:#02204f}
+.fade-in{animation:fadeIn .36s ease both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.helper{font-size:13px;color:var(--muted)}
+.tabs-content{margin-top:16px}
+.hidden{display:none}
+.copy-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px 8px;border-radius:8px;color:var(--muted);cursor:pointer}
+.card-shadow{box-shadow:0 12px 40px rgba(0,0,0,0.7)}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card animate">
-      <header>
-        <div>
-          <h1>Szymix SAB SHOP</h1>
-          <div class="muted">Logowanie przez Discord • Licencje w Firestore</div>
-        </div>
-        <div id="authArea">
-          <button class="btn" id="loginBtn">Zaloguj przez Discord</button>
-        </div>
-      </header>
-
-      <div class="tabbar" style="margin-top:14px;">
-        <div class="tab active" data-tab="user">Dla użytkowników</div>
-        <div class="tab" data-tab="admin">Dla adminów</div>
-        <div class="tab" data-tab="manage" style="display:none">Zarządzanie</div>
+  <div class="container">
+    <div class="header">
+      <div class="brand">
+        <h1>Szymix SAB SHOP</h1>
+        <div class="sub">Logowanie przez Discord • Licencje w Firestore</div>
       </div>
 
-      <main style="margin-top:14px">
-        <section id="userTab">
-          <h3>Twoje licencje</h3>
-          <div id="yourLicenses" class="grid"></div>
+      <div class="authArea" id="authArea">
+        <div id="userInfo" class="hidden">
+          <div class="small" id="userName"></div>
+        </div>
+        <button class="btn" id="loginBtn">Zaloguj przez Discord</button>
+        <button class="btn ghost small" id="manualLoginBtn">Wklej ID</button>
+      </div>
+    </div>
 
-          <h4>Odbierz licencję</h4>
-          <div style="display:flex;gap:8px;align-items:center">
-            <input id="redeemInput" placeholder="Wpisz kod licencji (np. LIC-XXX-XXX-XXX)">
-            <button class="btn" id="redeemBtn">Odbierz</button>
+    <div class="tabbar">
+      <div class="tab active" data-tab="user">Twoje licencje</div>
+      <div class="tab" data-tab="redeem">Odbierz</div>
+      <div class="tab" data-tab="admin">Panel admina</div>
+      <div class="tab" data-tab="manage" style="display:none">Zarządzanie</div>
+    </div>
+
+    <div class="card card-shadow tabs-content">
+      <!-- USER TAB -->
+      <div id="tab-user">
+        <h3>Twoje licencje</h3>
+        <div id="yourLicenses" class="grid"></div>
+        <div class="helper" style="margin-top:10px">Jeśli nie widzisz licencji, sprawdź czy jesteś zalogowany.</div>
+      </div>
+
+      <!-- REDEEM TAB -->
+      <div id="tab-redeem" class="hidden">
+        <h3>Odbierz licencję</h3>
+        <div class="row">
+          <input id="redeemInput" class="input" placeholder="Wpisz kod licencji (np. LIC-AAA-BBB-CCC)">
+          <button class="btn" id="redeemBtn">Odbierz</button>
+        </div>
+        <div id="redeemInfo" class="small" style="margin-top:8px"></div>
+      </div>
+
+      <!-- ADMIN TAB -->
+      <div id="tab-admin" class="hidden">
+        <h3>Tworzenie licencji (tylko admin)</h3>
+        <div class="grid">
+          <div class="row">
+            <input id="descInput" class="input" placeholder="Opis licencji">
+            <input id="durationInput" class="input" style="width:120px" type="number" min="1" value="30">
           </div>
-          <div id="redeemMsg" class="small" style="margin-top:8px"></div>
-        </section>
-
-        <section id="adminTab" style="display:none">
-          <h3>Tworzenie licencji (tylko admin)</h3>
-          <div id="adminArea" class="grid">
-            <input id="desc" placeholder="Opis licencji" />
-            <div style="display:flex;gap:8px">
-              <input id="duration" type="number" value="30" min="1" style="width:160px" />
-              <div class="small" style="align-self:center">dni</div>
-            </div>
-            <div style="display:flex;gap:8px">
-              <button class="btn" id="createBtn">Utwórz licencję</button>
-              <div id="createMsg" class="small" style="align-self:center"></div>
-            </div>
+          <div class="row">
+            <button class="btn" id="createBtn">Utwórz licencję</button>
+            <button class="btn ghost" id="createManyBtn">Utwórz 5 naraz</button>
+            <button class="btn ghost" id="copyMyIdBtn">Kopiuj moje ID</button>
           </div>
-        </section>
+          <div id="createInfo" class="small"></div>
+        </div>
+      </div>
 
-        <section id="manageTab" style="display:none">
-          <h3>Zarządzaj licencjami</h3>
-          <div id="manageList" class="grid"></div>
-        </section>
-      </main>
+      <!-- MANAGE TAB -->
+      <div id="tab-manage" class="hidden">
+        <h3>Zarządzanie licencjami (admin)</h3>
+        <div id="manageList" class="grid"></div>
+      </div>
 
-      <footer>
-        <div id="status" class="small">Status: niepołączony</div>
-        <div class="small" style="margin-top:6px">Uwaga: klientowa implementacja używa OAuth implicit flow (brak servera). Dla bezpieczeństwa zalecany backend.</div>
-      </footer>
     </div>
   </div>
 
-  <!-- Firebase v9 modular SDK (CDN) -->
-  <script type="module">
-  // ---------------- CONFIG: uzupełnij jeśli chcesz inaczej ----------------
-  // Public Discord client id (może być w kliencie)
-  const DISCORD_CLIENT_ID = "1432478113287114843";
-  // Redirect musi zgadzać się z Discord OAuth Redirects w panelu aplikacji
-  const REDIRECT_URI = window.location.origin + "/";
+  <div class="toast-wrap" id="toastWrap"></div>
 
-  // YOUR FIREBASE CONFIG (już podałeś wcześniej) - wklejone tutaj:
+  <!-- Firebase SDK (modular) -->
+  <script type="module">
+  // ---------- CONFIG ----------
+  const DISCORD_CLIENT_ID = "1432478113287114843"; // public ok
+  const REDIRECT_URI = window.location.origin + "/"; // must match redirect configured in Discord app
   const FIREBASE_CONFIG = {
     apiKey: "AIzaSyCqjstC6TSrg4z4grxJMIUjRDhRQuqwFEg",
     authDomain: "kastibots.firebaseapp.com",
@@ -113,188 +128,287 @@
     appId: "1:882457374605:web:d3b893fd7a38b6492797c4",
     measurementId: "G-PHPP5W2E51"
   };
-  // ------------------------------------------------------------------------
+  // ----------------------------
 
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.24.0/firebase-app.js";
-  import { getFirestore, collection, doc, getDoc, setDoc, addDoc, query, where, getDocs, onSnapshot, updateDoc, orderBy } from "https://www.gstatic.com/firebasejs/9.24.0/firebase-firestore.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import {
+    getFirestore, collection, doc, getDoc, setDoc, addDoc, getDocs, updateDoc,
+    query, where, onSnapshot, orderBy
+  } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-  // Init Firebase
   const app = initializeApp(FIREBASE_CONFIG);
   const db = getFirestore(app);
 
-  // UI refs
+  // UI elements
+  const tabs = document.querySelectorAll('.tab');
+  const toastWrap = document.getElementById('toastWrap');
   const loginBtn = document.getElementById('loginBtn');
-  const statusEl = document.getElementById('status');
-  const redeemBtn = document.getElementById('redeemBtn');
-  const createBtn = document.getElementById('createBtn');
+  const manualLoginBtn = document.getElementById('manualLoginBtn');
+  const userNameEl = document.getElementById('userName');
+  const userInfoEl = document.getElementById('userInfo');
+  const copyMyIdBtn = document.getElementById('copyMyIdBtn');
 
-  let accessToken = null;
-  let currentUser = null; // { id, username, discriminator, avatar }
-
-  // Utility: generate code LIC-XXX-XXX-XXX
-  function randChunk(len=3){
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let s = "";
-    for(let i=0;i<len;i++) s += chars[Math.floor(Math.random()*chars.length)];
-    return s;
-  }
-  function generateLicenseCode(){ return `LIC-${randChunk(3)}-${randChunk(3)}-${randChunk(3)}`; }
-
-  // Tabs
-  document.querySelectorAll('.tab').forEach(t=>{
+  // tabs logic
+  tabs.forEach(t=>{
     t.addEventListener('click', ()=>{
-      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      tabs.forEach(x=>x.classList.remove('active'));
       t.classList.add('active');
       const tab = t.dataset.tab;
-      document.getElementById('userTab').style.display = (tab==='user') ? 'block' : 'none';
-      document.getElementById('adminTab').style.display = (tab==='admin') ? 'block' : 'none';
-      document.getElementById('manageTab').style.display = (tab==='manage') ? 'block' : 'none';
+      document.querySelectorAll('[id^="tab-"]').forEach(el=>el.classList.add('hidden'));
+      document.getElementById('tab-' + tab).classList.remove('hidden');
     });
   });
 
-  // Start Discord implicit OAuth (response_type=token)
-  loginBtn.addEventListener('click', ()=>{
-    const scope = encodeURIComponent('identify');
-    const redirect = encodeURIComponent(REDIRECT_URI);
-    // response_type=token -> implicit grant: token will be in URL fragment (#access_token=...)
-    const url = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${redirect}&response_type=token&scope=${scope}&prompt=consent`;
-    window.location.href = url;
-  });
+  // helper: toast
+  function showToast(message, type='info', ms=3200){
+    const div = document.createElement('div');
+    div.className = `toast ${type} fade-in`;
+    div.textContent = message;
+    toastWrap.appendChild(div);
+    setTimeout(()=>{ div.style.opacity='0'; div.style.transform='translateY(8px)'; }, ms);
+    setTimeout(()=>div.remove(), ms+400);
+  }
 
-  // Parse fragment after implicit redirect (access_token)
-  function parseFragment() {
-    const hash = window.location.hash.substring(1); // remove '#'
-    if (!hash) return null;
-    return Object.fromEntries(hash.split('&').map(part => {
-      const [k,v] = part.split('=');
-      return [decodeURIComponent(k), decodeURIComponent(v)];
-    }));
+  // parse fragment (implicit OAuth)
+  function parseFragment(){
+    const hash = location.hash.slice(1);
+    if(!hash) return null;
+    const obj = Object.fromEntries(hash.split('&').map(p=>{ const [k,v]=p.split('='); return [decodeURIComponent(k), decodeURIComponent(v)]; }));
+    return obj;
   }
 
   async function fetchDiscordMe(token){
-    const r = await fetch('https://discord.com/api/users/@me', { headers: { Authorization: `Bearer ${token}` }});
-    if (!r.ok) throw new Error('Nie udało się pobrać profilu Discord: ' + r.status);
-    return await r.json(); // { id, username, discriminator, avatar }
+    const r = await fetch('https://discord.com/api/users/@me', { headers:{ Authorization: 'Bearer ' + token }});
+    if(!r.ok) throw new Error('Błąd pobierania profilu (' + r.status + ')');
+    return await r.json();
   }
 
-  // Check if user is admin by reading admins collection doc with id = discord id
-  async function checkIsAdmin(discordId){
-    try {
-      const docRef = doc(db, 'admins', discordId);
-      const snap = await getDoc(docRef);
-      return snap.exists() ? (snap.data() || {}) : null;
-    } catch(e){ console.error(e); return null; }
+  // state
+  let currentUser = null; // { id, username, discriminator, isAdmin }
+  let unsubYourLicenses = null;
+  let unsubAllLicenses = null;
+
+  // store/load user in localStorage
+  function persistUser(){
+    if(currentUser) localStorage.setItem('ss_user', JSON.stringify(currentUser));
+    else localStorage.removeItem('ss_user');
+  }
+  function loadPersisted(){
+    const s = localStorage.getItem('ss_user');
+    if(!s) return null;
+    try { return JSON.parse(s); } catch { return null; }
   }
 
-  // Load user's licenses (assignedTo == discord id)
-  async function loadYourLicenses(){
-    const container = document.getElementById('yourLicenses');
-    container.innerHTML = 'Ładuję...';
-    if (!currentUser) { container.innerHTML = '<div class="small">Zaloguj się.</div>'; return; }
-    try {
-      const q = query(collection(db, 'licenses'), where('assignedTo','==', currentUser.id));
-      const snap = await getDocs(q);
-      const arr = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      if (arr.length === 0) container.innerHTML = '<div class="small">Brak licencji</div>';
-      else container.innerHTML = arr.map(l => `<div class="license"><div><div class="code">${l.code}</div><div class="small">${l.description || ''}</div><div class="small">Wygasa: ${l.expiresAt ? new Date(l.expiresAt).toLocaleString() : '-'}</div></div><div class="small">${l.active ? 'Aktywna' : 'Nieaktywna'}</div></div>`).join('');
-    } catch(e){ console.error(e); container.innerHTML = '<div class="small danger">Błąd ładowania</div>'; }
-  }
-
-  // Load all licenses for manage tab (admin)
-  async function loadAllLicenses(){
-    const el = document.getElementById('manageList');
-    el.innerHTML = 'Ładuję...';
-    try {
-      const snap = await getDocs(collection(db, 'licenses'));
-      const arr = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      if (arr.length === 0) el.innerHTML = '<div class="small">Brak licencji</div>';
-      else el.innerHTML = arr.map(l => `<div class="license"><div><div class="code">${l.code}</div><div class="small">${l.description||''}</div><div class="small">Utworzono: ${l.createdByName||l.createdBy||'-'}</div></div><div style="display:flex;flex-direction:column;gap:8px"><div class="small">${l.assignedToName || (l.assignedTo || 'nieprzypisana')}</div><button class="btn" data-id="${l.id}" data-active="${l.active}">${l.active ? 'Dezaktywuj' : 'Aktywuj'}</button></div></div>`).join('');
-      // attach toggle events
-      el.querySelectorAll('button[data-id]').forEach(btn=>{
-        btn.addEventListener('click', async (e)=>{
-          const id = btn.dataset.id; const cur = btn.dataset.active === 'true';
-          try { await updateDoc(doc(db,'licenses',id), { active: !cur }); await loadAllLicenses(); } catch(err){ alert('Błąd: ' + err.message); }
-        });
-      });
-    } catch(e){ console.error(e); el.innerHTML = '<div class="small danger">Błąd ładowania</div>'; }
-  }
-
-  // Create license (only if admin)
-  createBtn.addEventListener('click', async ()=>{
-    if (!currentUser || !currentUser.isAdmin) { document.getElementById('createMsg').textContent = 'Brak uprawnień.'; return; }
-    const desc = document.getElementById('desc').value || '';
-    const durationDays = Number(document.getElementById('duration').value || 30);
-    const code = generateLicenseCode();
-    const expiresAt = Date.now() + durationDays * 24*60*60*1000;
-    try {
-      await addDoc(collection(db,'licenses'), {
-        code, description: desc, createdBy: currentUser.id, createdByName: `${currentUser.username}#${currentUser.discriminator}`,
-        createdAt: Date.now(), expiresAt, assignedTo: null, assignedToName: null, active: true
-      });
-      document.getElementById('createMsg').textContent = 'Utworzono: ' + code;
-      await loadAllLicenses();
-    } catch(e){ console.error(e); document.getElementById('createMsg').textContent = 'Błąd: ' + e.message; }
-  });
-
-  // Redeem license: find code and assign to current user if active and not assigned
-  redeemBtn.addEventListener('click', async ()=>{
-    const code = document.getElementById('redeemInput').value.trim();
-    const msg = document.getElementById('redeemMsg');
-    if (!code) { msg.textContent = 'Wpisz kod.'; return; }
-    if (!currentUser) { msg.textContent = 'Zaloguj się.'; return; }
-    try {
-      const q = query(collection(db,'licenses'), where('code','==',code));
-      const snap = await getDocs(q);
-      if (snap.empty) { msg.textContent = 'Nie znaleziono takiej licencji.'; return; }
-      const docSnap = snap.docs[0];
-      const data = docSnap.data();
-      if (!data.active) { msg.textContent = 'Ta licencja nieaktywna.'; return; }
-      if (data.assignedTo) { msg.textContent = 'Licencja już przypisana.'; return; }
-      // assign
-      await updateDoc(doc(db,'licenses',docSnap.id), { assignedTo: currentUser.id, assignedToName: `${currentUser.username}#${currentUser.discriminator}` });
-      msg.textContent = 'Pomyślnie przypisano licencję.';
-      await loadYourLicenses();
-    } catch(e){ console.error(e); msg.textContent = 'Błąd: ' + e.message; }
-  });
-
-  // On load: parse fragment, fetch Discord profile, check admin, load data
-  (async ()=>{
-    try {
-      // If we have fragment with access_token (implicit flow), parse it
-      const frag = parseFragment();
-      if (frag && frag.access_token) {
-        accessToken = frag.access_token;
-        // remove fragment for cleanliness
-        history.replaceState({}, document.title, window.location.pathname + window.location.search);
-        // fetch profile
-        statusEl.textContent = 'Logowanie...';
-        const me = await fetchDiscordMe(accessToken);
-        currentUser = { id: me.id, username: me.username, discriminator: me.discriminator, avatar: me.avatar, isAdmin:false };
-        // check admins collection
-        const adminDoc = await checkIsAdmin(currentUser.id);
-        if (adminDoc) currentUser.isAdmin = true;
-        // update auth area
-        document.getElementById('authArea').innerHTML = `<div class="small">${currentUser.username}#${currentUser.discriminator}${currentUser.isAdmin ? ' • Admin':''} <button id="logoutBtn" class="btn" style="background:#222;margin-left:8px">Wyloguj</button></div>`;
-        document.getElementById('logoutBtn').addEventListener('click', ()=>{
-          accessToken = null; currentUser = null; document.getElementById('authArea').innerHTML = '<button class="btn" id="loginBtn">Zaloguj przez Discord</button>'; document.getElementById('loginBtn').addEventListener('click', ()=>location.href=location.href); // reload to login
-          // reset UI
-          document.getElementById('yourLicenses').innerHTML = ''; document.getElementById('createMsg').textContent=''; document.getElementById('redeemMsg').textContent='';
-        });
-        // show/hide admin tabs if admin
-        if (currentUser.isAdmin) {
-          document.querySelector('.tab[data-tab="admin"]').style.display = 'inline-block';
-          document.querySelector('.tab[data-tab="manage"]').style.display = 'inline-block';
-        }
-        statusEl.textContent = 'Zalogowano jako ' + currentUser.username;
-        await loadYourLicenses();
-        if (currentUser.isAdmin) await loadAllLicenses();
+  // UI update after login
+  function updateAuthUI(){
+    if(currentUser){
+      userInfoEl.classList.remove('hidden');
+      userNameEl.textContent = `${currentUser.username || currentUser.id}${currentUser.isAdmin ? ' • Admin' : ''}`;
+      loginBtn.textContent = 'Wyloguj';
+      manualLoginBtn.textContent = 'Zmień ID';
+      // show admin tabs if admin
+      if(currentUser.isAdmin){
+        document.querySelector('.tab[data-tab="admin"]').style.display = 'inline-block';
+        document.querySelector('.tab[data-tab="manage"]').style.display = 'inline-block';
       } else {
-        statusEl.textContent = 'Gotowy. Zaloguj się przez Discord.';
+        document.querySelector('.tab[data-tab="admin"]').style.display = 'inline-block';
+        document.querySelector('.tab[data-tab="manage"]').style.display = 'none';
       }
-    } catch(e){
-      console.error(e);
-      statusEl.textContent = 'Błąd logowania: ' + e.message;
+    } else {
+      userInfoEl.classList.add('hidden');
+      userNameEl.textContent = '';
+      loginBtn.textContent = 'Zaloguj przez Discord';
+      manualLoginBtn.textContent = 'Wklej ID';
+      document.querySelector('.tab[data-tab="manage"]').style.display = 'none';
     }
+  }
+
+  // subscribe to user's licenses live
+  function subscribeYourLicenses(){
+    if(unsubYourLicenses) { unsubYourLicenses(); unsubYourLicenses = null; }
+    if(!currentUser) return;
+    const q = query(collection(db,'licenses'), where('assignedTo','==', currentUser.id), orderBy('createdAt','desc'));
+    unsubYourLicenses = onSnapshot(q, snap=>{
+      const arr = snap.docs.map(d=>({ id:d.id, ...d.data() }));
+      const yourLicensesEl = document.getElementById('yourLicenses');
+      if(arr.length===0) yourLicensesEl.innerHTML = '<div class="small">Brak licencji.</div>';
+      else yourLicensesEl.innerHTML = arr.map(l=>`<div class="license"><div><div class="code">${l.code || l.id}</div><div class="small">${l.description||''}</div></div><div class="small">${l.active ? 'Aktywna' : 'Nieaktywna'}</div></div>`).join('');
+    }, err=>{
+      console.error(err); showToast('Błąd subskrypcji licencji: ' + err.message, 'error');
+    });
+  }
+
+  // subscribe all licenses if admin
+  function subscribeAllLicenses(){
+    if(unsubAllLicenses) { unsubAllLicenses(); unsubAllLicenses = null; }
+    if(!currentUser?.isAdmin) return;
+    const q = query(collection(db,'licenses'), orderBy('createdAt','desc'));
+    unsubAllLicenses = onSnapshot(q, snap=>{
+      const arr = snap.docs.map(d=>({ id:d.id, ...d.data() }));
+      const manageEl = document.getElementById('manageList');
+      if(arr.length===0) manageEl.innerHTML = '<div class="small">Brak licencji w bazie.</div>';
+      else manageEl.innerHTML = arr.map(l=>`
+        <div class="license">
+          <div>
+            <div class="code">${l.code || l.id}</div>
+            <div class="small">${l.description||''}</div>
+            <div class="small">Utworzono: ${l.createdByName||l.createdBy||'-'}</div>
+            <div class="small">Przypisane: ${l.assignedToName || (l.assignedTo || 'nieprzypisana')}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button class="btn small" data-id="${l.id}" data-active="${l.active}">${l.active ? 'Dezaktywuj' : 'Aktywuj'}</button>
+          </div>
+        </div>
+      `).join('');
+      // attach toggles
+      manageEl.querySelectorAll('button[data-id]').forEach(btn=>{
+        btn.onclick = async ()=>{
+          const id = btn.dataset.id; const cur = btn.dataset.active === 'true';
+          try { await updateDoc(doc(db,'licenses',id), { active: !cur }); showToast('Zmieniono status', 'success'); }
+          catch(e){ console.error(e); showToast('Błąd: '+ e.message, 'error'); }
+        };
+      });
+    }, err=>{
+      console.error(err); showToast('Błąd subskrypcji (admin): ' + err.message, 'error');
+    });
+  }
+
+  // login via manual ID dialog
+  manualLoginBtn.addEventListener('click', async ()=>{
+    const prev = prompt('Wklej swój Discord ID (kopiuj z aplikacji Discord, włącz Developer Mode):', (currentUser?.id) || '');
+    if(!prev) return;
+    try {
+      // check admins collection
+      const admSnap = await getDoc(doc(db,'admins',prev));
+      currentUser = { id: prev, username: prev, discriminator: '', isAdmin: admSnap.exists() };
+      persistUser(); updateAuthUI(); subscribeYourLicenses(); if(currentUser.isAdmin) subscribeAllLicenses();
+      showToast('Zalogowano (manualnie) jako ' + prev, 'success');
+    } catch(e){ console.error(e); showToast('Błąd logowania: ' + e.message,'error'); }
+  });
+
+  // login via Discord implicit flow
+  loginBtn.addEventListener('click', ()=>{
+    if(currentUser){ // logout
+      currentUser = null; persistUser(); updateAuthUI(); if(unsubYourLicenses) unsubYourLicenses(); if(unsubAllLicenses) unsubAllLicenses();
+      showToast('Wylogowano', 'info'); return;
+    }
+    const scope = encodeURIComponent('identify');
+    const redirect = encodeURIComponent(REDIRECT_URI);
+    const url = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${redirect}&response_type=token&scope=${scope}&prompt=consent`;
+    location.href = url;
+  });
+
+  // parse fragment for access_token if redirected from Discord
+  (async function handleRedirect(){
+    try{
+      const frag = parseFragment();
+      if(frag && frag.access_token){
+        // clear fragment from URL
+        history.replaceState(null, '', location.pathname + location.search);
+        showToast('Logowanie przez Discord — pobieram profil...', 'info');
+        const me = await fetchDiscordMe(frag.access_token);
+        // check admins
+        const admSnap = await getDoc(doc(db,'admins',me.id));
+        currentUser = { id: me.id, username: me.username, discriminator: me.discriminator, isAdmin: admSnap.exists() };
+        persistUser(); updateAuthUI(); subscribeYourLicenses(); if(currentUser.isAdmin) subscribeAllLicenses();
+        showToast('Zalogowano jako ' + me.username, 'success');
+        return;
+      }
+      // if no fragment: try persisted user
+      const persisted = loadPersisted();
+      if(persisted){
+        currentUser = persisted; updateAuthUI(); subscribeYourLicenses(); if(currentUser.isAdmin) subscribeAllLicenses();
+      }
+    }catch(e){ console.error(e); showToast('Błąd logowania: ' + e.message, 'error'); }
+  })();
+
+  // create license (admin)
+  document.getElementById('createBtn').addEventListener('click', async ()=>{
+    if(!currentUser?.isAdmin) { showToast('Brak uprawnień (admin).', 'error'); return; }
+    const desc = document.getElementById('descInput').value.trim();
+    const dur = Number(document.getElementById('durationInput').value || 30);
+    // generate code
+    const s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const chunk = ()=> Array.from({length:3},()=>s[Math.floor(Math.random()*s.length)]).join('');
+    const code = `LIC-${chunk()}-${chunk()}-${chunk()}`;
+    try {
+      await setDoc(doc(db,'licenses', code), {
+        code, description: desc, createdBy: currentUser.id, createdByName: (currentUser.username ? `${currentUser.username}#${currentUser.discriminator}` : currentUser.id),
+        createdAt: Date.now(), expiresAt: Date.now() + dur*24*60*60*1000, assignedTo: null, assignedToName: null, active: true
+      });
+      showToast('Utworzono licencję: ' + code, 'success');
+      document.getElementById('descInput').value = '';
+    } catch(e){ console.error(e); showToast('Błąd tworzenia: '+ e.message, 'error'); }
+  });
+
+  // create many (5)
+  document.getElementById('createManyBtn').addEventListener('click', async ()=>{
+    if(!currentUser?.isAdmin) { showToast('Brak uprawnień (admin).','error'); return; }
+    const desc = document.getElementById('descInput').value.trim();
+    const dur = Number(document.getElementById('durationInput').value || 30);
+    const s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const chunk = ()=> Array.from({length:3},()=>s[Math.floor(Math.random()*s.length)]).join('');
+    try {
+      const codes = [];
+      for(let i=0;i<5;i++){
+        const code = `LIC-${chunk()}-${chunk()}-${chunk()}`;
+        await setDoc(doc(db,'licenses',code), {
+          code, description: desc, createdBy: currentUser.id, createdByName: (currentUser.username ? `${currentUser.username}#${currentUser.discriminator}` : currentUser.id),
+          createdAt: Date.now(), expiresAt: Date.now() + dur*24*60*60*1000, assignedTo: null, assignedToName: null, active: true
+        });
+        codes.push(code);
+      }
+      showToast('Utworzono: ' + codes.join(', '), 'success', 6000);
+    } catch(e){ console.error(e); showToast('Błąd: '+ e.message, 'error'); }
+  });
+
+  // redeem license
+  document.getElementById('redeemBtn').addEventListener('click', async ()=>{
+    if(!currentUser){ showToast('Zaloguj się najpierw','error'); return; }
+    const code = document.getElementById('redeemInput').value.trim();
+    if(!code) return showToast('Wpisz kod','info');
+    try {
+      const docRef = doc(db,'licenses',code);
+      const snap = await getDoc(docRef);
+      if(!snap.exists()) return showToast('Nie znaleziono takiej licencji','error');
+      const data = snap.data();
+      if(!data.active) return showToast('Licencja nieaktywna','error');
+      if(data.assignedTo) return showToast('Licencja już przypisana','error');
+      await updateDoc(docRef,{assignedTo: currentUser.id, assignedToName: (currentUser.username ? `${currentUser.username}#${currentUser.discriminator}` : currentUser.id)});
+      showToast('Pomyślnie przypisano licencję', 'success');
+    } catch(e){ console.error(e); showToast('Błąd przypisania: ' + e.message, 'error'); }
+  });
+
+  // copy my id button
+  document.getElementById('copyMyIdBtn').addEventListener('click', async ()=>{
+    if(!currentUser) return showToast('Zaloguj się','info');
+    try {
+      await navigator.clipboard.writeText(currentUser.id);
+      showToast('Skopiowano ID do schowka', 'success');
+    } catch(e){ showToast('Nie udało się skopiować','error'); }
+  });
+
+  // utility to load admin list from firestore and show who is admin (if needed)
+  async function refreshAdminTabs(){
+    // this is optional — we already check per-login and show/hide tabs
+    // but we can also fetch admins to show debug info if desired
+  }
+
+  // cleanup before unload
+  window.addEventListener('beforeunload', ()=>{
+    if(unsubYourLicenses) unsubYourLicenses();
+    if(unsubAllLicenses) unsubAllLicenses();
+  });
+
+  // small helper to set visible initial state
+  (function init(){
+    // if persisted user exists -> auto-login
+    const stored = loadPersisted();
+    if(stored){
+      currentUser = stored; updateAuthUI(); subscribeYourLicenses(); if(currentUser.isAdmin) subscribeAllLicenses();
+    }
+    // initial tab shows user
+    document.querySelector('.tab[data-tab="user"]').classList.add('active');
   })();
 
   </script>
